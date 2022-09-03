@@ -5,8 +5,12 @@ const loadData = () => {
     .then((res) => res.json())
     .then((data) => displayCategory(data.data.news_category));
 };
-loadData();
-
+// Implementation of try catch
+try {
+  loadData();
+} catch (error) {
+  console.log(error);
+}
 const displayCategory = (data) => {
   console.log(data);
   const catConatiner = document.getElementById("category-container");
@@ -27,7 +31,14 @@ const content = (id) => {
 
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayNews(data.data));
+    .then((data) => {
+      // Try Catch Implementation
+      try {
+        displayNews(data.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
 };
 
 const displayNews = (data) => {
