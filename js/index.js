@@ -61,8 +61,8 @@ const displayNews = (data) => {
     newsDiv.classList.add("news");
 
     newsDiv.innerHTML = `
-     <div  class="d-flex m-5 border border-1 rounded-1 "  >
-    <div>  <img src=${item.thumbnail_url}/> </div>
+     <div  class="d-flex flex-md-row flex-column m-5 border border-1 rounded-1 "  >
+    <div>  <img  src=${item.thumbnail_url}/> </div>
     <div class = 'm-3 p-3'>
     <h3>${item.title}</h3>
     <p> ${item.details.slice(0, 400)}...</p>
@@ -89,9 +89,11 @@ const displayNews = (data) => {
   toggleSpinner(false);
 };
 
-// const displayModal = (id) => {
-//   console.log(id);
-// };
+const displayModal = (id) => {
+  console.log(id);
+  const modalContainer = document.getElementById("modalContainer");
+  const modalDiv = document.createElement("div");
+};
 
 // const modalContent = (id) => {
 //   const url = `https://openapi.programming-hero.com/api/news/category/0${id}`;
