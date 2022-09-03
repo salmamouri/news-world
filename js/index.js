@@ -31,9 +31,18 @@ const content = (id) => {
 };
 
 const displayNews = (data) => {
-  console.log(data);
+  console.log(data.length);
+  const newsLength = document.getElementById("news-length");
+  newsLength.innerHTML = "";
+  const lengthDiv = document.createElement("div");
+
+  lengthDiv.innerHTML = `
+  <div  class="w-100 py-3 px-3 mt-3 rounded bg-light">${data.length} News Founded </div> `;
+
+  newsLength.appendChild(lengthDiv);
 
   const newsContainer = document.getElementById("displayNews");
+
   toggleSpinner(true);
   newsContainer.innerHTML = "";
   data.forEach((item) => {
