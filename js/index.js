@@ -40,7 +40,7 @@ const displayNews = (data) => {
     newsDiv.classList.add("news");
 
     newsDiv.innerHTML = `
-     <div   class="d-flex m-5 border border-1 rounded-1 ">
+     <div  class="d-flex m-5 border border-1 rounded-1 "  >
     <div>  <img src=${item.thumbnail_url}/> </div>
     <div class = 'm-3 p-3'>
     <h3>${item.title}</h3>
@@ -55,10 +55,55 @@ const displayNews = (data) => {
       <p> <i class="fa-regular fa-eye"></i> ${item.total_view} </p>
       <p> <i class="fa-solid fa-star"></i> ${item.rating.number}</p>
       <p><i class="fa-solid fa-arrow-right"></i></p></div>
+      <button onclick='displayModal(${
+        item._id
+      })' data-bs-toggle="modal" data-bs-target="#exampleModal">details</button>
     </div>
      
      </div>
     `;
     newsContainer.appendChild(newsDiv);
+  });
+};
+
+const modalContent = (id) => {
+  const url = `https://openapi.programming-hero.com/api/news/category/0${id}`;
+  console.log(url);
+
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => displayModal(data.data));
+};
+const displayModal = (data) => {
+  const modalContainer = document.getElementById("modalContainer");
+  data.forEach((item) => {
+    const modalDiv = document.createElement("div");
+    modalDiv.classList.add("modal");
+    modalDiv.innerHTML = `
+//     <!-- Button trigger modal -->
+// <button type="button" class="btn btn-primary" >
+//   Launch demo modal
+// </button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">${item.title}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+    `;
+    modalContainer.appendChilda(modalDiv);
   });
 };
